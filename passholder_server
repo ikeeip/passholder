@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# process' user and group
+USER=ikeeip
+GROUP=ikeeip
+
+# twisted reactor (select, poll, epoll, kqueue)
+REACTOR=epoll
+
+# pidfile and logfile
+PIDFILE=passholder.pid
+LOGFILE=passholder.log
+
+# redis host, port and connection pool size
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
+REDIS_POOL=10
+
+# server port, and interface to listen on
+PORT=8123
+LISTEN=127.0.0.1
+
+SCRIPT_FOLDER=$(readlink -f $0)
+SCRIPT_FOLDER=$(dirname $SCRIPT_FOLDER)
+
+# testing
+export PASSHOLDERPWD=123qwe
+export PYTHONPATH=`dirname $0`:$PYTHONPATH
+cd $SCRIPT_FOLDER; exec twistd -n passholder --password='env:NONTARG' $*
+
+# production
+#export PYTHONPATH=`dirname $0`:$PYTHONPATH
+#cd $SCRIPT_FOLDER; exec twistd --pidfile=$PIDFILE --logfile=$LOGFILE --reactor=$REACTOR --uid=$USER --gid=$GROUP \
+#   passholder --redis-host=$REDIS_HOST --redis-port=$REDIS_PORT --redis-pool=$REDIS_POOL \
+#   --port=$PORT --listen=$LISTEN --password=$PASSHLDPWD
+
