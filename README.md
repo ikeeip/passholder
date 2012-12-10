@@ -7,8 +7,11 @@ python, twisted, openssl, scrypt
 
 Install
 -------
-TODO
+python setup.py install
+
+please use virtualenv for secure reason
 
 Usage
 -----
-TODO
+
+./passholder\_server\_

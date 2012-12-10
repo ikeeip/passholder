@@ -26,7 +26,7 @@ SCRIPT_FOLDER=$(dirname $SCRIPT_FOLDER)
 # testing
 export PASSHOLDERPWD=123qwe
 export PYTHONPATH=`dirname $0`:$PYTHONPATH
-cd $SCRIPT_FOLDER; exec twistd -n passholder --password='env:NONTARG' $*
+cd $SCRIPT_FOLDER; exec twistd -n passholder --password='env:PASSHOLDERPWD' $*
 
 # production
 #export PYTHONPATH=`dirname $0`:$PYTHONPATH
